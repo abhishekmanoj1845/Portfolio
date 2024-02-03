@@ -14,3 +14,22 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+class Technology(models.Model):
+    item = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.item
+    
+class Project(models.Model):
+    pro_title = models.CharField(max_length=200)
+    pro_desc = models.TextField(max_length=300)
+    pro_spec = models.TextField(max_length=500)
+    pro_tech = models.ManyToManyField(Technology)
+    pro_git = models.URLField()
+    pro_thumb = models.URLField()
+    
+    def get_pro_spec_list(self):
+        return self.pro_spec.split(', ')
+    def __str__(self):
+        return self.pro_title

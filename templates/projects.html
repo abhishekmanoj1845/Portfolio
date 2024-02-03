@@ -5,8 +5,43 @@
 
 {% block content %}
 <div class='bg-gray-800 text-white p-5 md:py-8 md:px-20 lg:px-40 xl:px-60'>
-  <p style="font-family: Poppins-Bold" class='text-4xl font-extrabold py-5 text-center md:text-start'>Projects Completed</p>
-      <div style="box-shadow:0 5px 30px 0 rgba(0,0,0,.05);" class='flex flex-col md:flex-row gap-4 md:gap-x-8 bg-gray-900 p-5 mb-4 rounded-lg'>
+  <p style="font-family: Poppins-Bold" class='text-4xl font-extrabold py-5 text-center md:text-start'>Projects Accomplished</p>
+
+{% for project in projects %}
+<div style="box-shadow:0 5px 30px 0 rgba(0,0,0,.05);" class='flex flex-col md:flex-row gap-4 md:gap-x-8 bg-gray-900 p-5 mb-4 rounded-lg'>
+  {% comment %} <a href="{{project.pro_thumb}}"> {% endcomment %}
+  <img class="post-img-url rounded-lg object-cover" width='350px' height='180px' src="{{project.pro_thumb}}">
+  {% comment %} </a> {% endcomment %}
+  <div>
+    <p style="font-family: Poppins-Bold" class="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-blue-300 to-blue-600">{{ project.pro_title }}<p>
+    <p class='text-justify my-3'>{{ project.pro_desc }}</p>
+    <ul class='mb-3'>
+      {% for spec in project.get_pro_spec_list %}
+      <li>&#9989; {{ spec | capfirst }}</li>
+      {% endfor %}
+    </ul>
+    <span class='text-lg font-bold'>Technologies used</span><br>
+    
+      {% comment %} <ul> {% endcomment %}
+        {% for tech in project.pro_tech.all %}
+        <div class='flex space-x-2 my-3' style="display: inline-block;">
+          <span class='text-xs bg-gradient-to-r from-cyan-500 to-blue-500 py-1 px-4 rounded-full'><i class="fa-brands fa-{{tech.item | lower}}"></i>
+            
+            {{ tech.item }}
+            
+          </span>
+        </div>
+        {% endfor %}
+      {% comment %} </ul> {% endcomment %}
+      <div class='flex space-x-4 my-3'>
+        <a href='{{project.pro_git}}'  target = '_blank' class=''><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-slate-700 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'><i class="bi bi-github"></i> Github</button></a>
+        <a href='{{project.pro_thumb}}' target = '_blank'><button class='bg-blue-600 p-2 px-4 rounded-[6px] hover:bg-gray-800 hover:outline hover:outline-blue-600 transition delay-75 ease-in-out my-3'>Demo <i class="bi bi-box-arrow-up-right"></i></button></a>              
+      </div>
+  </div>
+</div>
+{% endfor %}
+
+      {% comment %} <div style="box-shadow:0 5px 30px 0 rgba(0,0,0,.05);" class='flex flex-col md:flex-row gap-4 md:gap-x-8 bg-gray-900 p-5 mb-4 rounded-lg'>
           <img class="post-img-url rounded-lg object-cover" width='350px' height='180px' src="https://cdn.jsdelivr.net/gh/hostmind/host/static/password-generator.png" alt="image">
           <div>
             <p style="font-family: Poppins-Bold" class="font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-blue-300 to-blue-600">Passsave - Python Password Manager<p>
@@ -88,10 +123,10 @@
               <a href='https://github.com/ashish-makes/movies-website-design'  target = '_blank' class=''><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-slate-700 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'><i class="bi bi-github"></i> Github</button></a>
               <a href='https://movies-web-design.netlify.app/' target = '_blank'><button class='bg-blue-600 p-2 px-4 rounded-[6px] hover:bg-gray-800 hover:outline hover:outline-blue-600 transition delay-75 ease-in-out my-3'>Demo <i class="bi bi-box-arrow-up-right"></i></button></a>              
             </div>
-          </div>
-      </div>
+          </div> {% endcomment %}
+      {% comment %} </div> {% endcomment %}
       <div class='flex justify-center'>
-        <a href='https://github.com/ashish-makes' target='_blank' class=''><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-blue-600 transition delay-75 ease-in-out my-3'>Load more <i class="bi bi-arrow-clockwise font-extrabold"></i></button></a>
+        <a href='/projects' target='_blank' class=''><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-blue-600 transition delay-75 ease-in-out my-3'>Load more <i class="bi bi-arrow-clockwise font-extrabold"></i></button></a>
       </div>
 </div>
       {% endblock %}

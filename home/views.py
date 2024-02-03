@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect, redirect, get_object_or_404
 from django.http import Http404
-from home.models import Blog
+from home.models import Blog, Project
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
@@ -47,7 +47,7 @@ def contact (request):
                 Email:\n\t\t{}\n
                 Phone:\n\t\t{}\n
                 '''.format(form_data['name'], form_data['message'], form_data['email'],form_data['phone'])
-                send_mail('You got a mail!', message, '', ['dev.ash.py@gmail.com'])
+                send_mail('You got a mail!', message, 'settings.EMAIL_HOST_USER', ['abhishekm1845@gmail.com'])
                 messages.success(request, 'Your message was sent.')
                 # return HttpResponseRedirect('/thanks')
             else:
@@ -55,7 +55,13 @@ def contact (request):
     return render(request, 'contact.html', {})
 
 def projects (request):
-    return render(request, 'projects.html')
+    projects = Project.objects.all()
+
+    context = {
+        'projects': projects,
+    }
+
+    return render(request, 'projects.html', context)
 
 def blog(request):
     blogs = Blog.objects.all().order_by('-time')

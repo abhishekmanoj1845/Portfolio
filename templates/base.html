@@ -12,8 +12,151 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/hostmind/host@latest/static/index.css">
     <title>{% block title %}{% endblock title %} - Abhishek</title>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/abhishekmanoj1845/Resume@main/logo.jpg" type="image/x-icon">
     {% tailwind_css %}
-</head> 
+
+    <style>
+      /* styles.css */
+    
+    
+      ---------------
+      .cursor {
+        width: 20px;
+        height: 20px;
+        border: 1px solid white;
+        border-radius: 50%;
+        position: absolute;
+        transition-duration: 200ms;
+        transition-timing-function: ease-out;
+        animation: cursorAnim .5s infinite alternate;
+        pointer-events: none;
+    }
+    
+    .cursor::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        border: 8px solid gray;
+        border-radius: 50%;
+        opacity: .5;
+        top: -8px;
+        left: -8px;
+        animation: cursorAnim2 .5s infinite alternate;
+    }
+    @keyframes cursorAnim {
+      from {
+          transform: scale(1);
+      }
+      to {
+          transform: scale(.7);
+      }
+    }
+    ​
+    @keyframes cursorAnim2 {
+      from {
+          transform: scale(1);
+      }
+      to {
+          transform: scale(.4);
+      }
+    }
+    ​
+    @keyframes cursorAnim3 {
+      0% {
+          transform: scale(1);
+      }
+      50% {
+          transform: scale(3);
+      }
+      100% {
+          transform: scale(1);
+          opacity: 0;
+      }
+    }
+    ​
+    .expand {
+      animation: cursorAnim3 .5s forwards;
+      border: 1px solid red;
+    }
+    ​
+      -----------------
+    
+      body {
+        font-family: Poppins;
+        transition: 0.3s ease-in-out;
+      }
+    
+      .wave {
+        animation-name: wave-animation;
+        animation-duration: 2.5s;
+        animation-iteration-count: infinite;
+        transform-origin: 70% 70%;
+        display: inline-block;
+      }
+    
+      @keyframes wave-animation {
+          0% { transform: rotate( 0.0deg) }
+         10% { transform: rotate(14.0deg) }
+         20% { transform: rotate(-8.0deg) }
+         30% { transform: rotate(14.0deg) }
+         40% { transform: rotate(-4.0deg) }
+         50% { transform: rotate(10.0deg) }
+         60% { transform: rotate( 0.0deg) }
+        100% { transform: rotate( 0.0deg) }
+      }
+    
+      .updn {
+        animation-name: up-down;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+      }
+    
+      @keyframes up-down {
+        0%   { transform: translateY(0); }
+        50%  { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+    
+    .searchModal {
+      display: none;
+    }
+    
+    .animate-reveal {
+        animation: reveal 0.3s ease-out;
+      }
+    
+    @keyframes reveal {
+        from {
+        opacity: 0;
+        transform: translateY(100%);
+      }
+        to {
+        opacity: 1;
+        transform: translateY(0%);
+      }
+    }
+    
+    @keyframes shake {
+      from, to {
+        transform: translate3d(0, 0, 0);
+      }
+    
+      10%, 30%, 50%, 70%, 90% {
+        transform: translate3d(-10px, 0, 0);
+      }
+    
+      20%, 40%, 60%, 80% {
+        transform: translate3d(10px, 0, 0);
+      }
+    }
+    
+    .shake {
+      animation: shake 0.5s;
+    }
+    
+    </style>
+</head>
 <body class="cursor">
     {% comment %} <div class="z-50 fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
 	id="my-modal"></div> {% endcomment %}
@@ -42,7 +185,7 @@
       </div>
 
       {% block content %}{% endblock %}
-      
+
     <footer class='bg-gray-900 text-white p-8 pb-2 grid md:grid-cols-3 md:gap-10 lg:gap-20 xl:gap-30 2xl:gap-40 md:px-40'>
         <div class='blog-name'>
             <p class='text-xl font-bold'>Abhishek M<p>
@@ -75,7 +218,7 @@
             <div class="bg-gray-900 rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-sm sm:w-full">
                 <form class="px-10 py-10">
                     <div class="text-xl text-center font-extrabold mb-4">Search</div>
-      
+
                     <!-- Search Input -->
                     <div class="mb-4 flex space-x-2">
                         <input type="text" class="searchInput w-full bg-gray-800 border border-slate-700 rounded-lg py-2 px-4 outline outline-transparent" placeholder="Enter your search query...">
@@ -84,19 +227,19 @@
                 </form>
                 <!-- Close Button -->
                 <button class="searchCloseBtn m-2 absolute top-0 right-0 font-medium transition-colors p-4 focus:outline-none" aria-label="Close"><i class="bi bi-x text-xl"></i></button>
-    
+
                 <div class='mx-3'>
                 <div class='flex md:flex-grow-2 justify-start space-x-3 text-sm md:text-base m-4 -mt-10 mb-8'>
                   <a href='/category/Python' class='sm:text-[12px] '><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'>Python</button></a>
                   <a href='/category/JavaScript' class='sm:text-[12px] '><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'>JavaScript</button></a>
                   <a href='/category/Design'  class='sm:text-[12px] '><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'>Design</button></a>
                 </div>
-    
+
                 <div class='flex md:flex-grow-2 justify-start space-x-3 text-sm md:text-base m-4 -mt-10'>
                   <a href='/category/Web Design' class='sm:text-[12px] '><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'>Web Design</button></a>
                   <a href='/category/Frameworks' class='sm:text-[12px] '><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'>Frameworks</button></a>
                 </div>
-    
+
                 <div class='flex md:flex-grow-2 justify-start space-x-3 text-sm md:text-base m-4 -mt-6'>
                     <a href='/category/Tools'  class='sm:text-[12px] '><button class='bg-gray-800 p-2 px-4 rounded-[6px] hover:bg-blue-600 outline hover:outline-none outline-slate-700 transition delay-75 ease-in-out my-3'>Tools</button></a>
                   </div>
@@ -107,151 +250,11 @@
 
 </body>
 
-<style>
-  /* styles.css */
 
- 
-  ---------------
-  .cursor {
-    width: 20px;
-    height: 20px;
-    border: 1px solid white;
-    border-radius: 50%;
-    position: absolute;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-    animation: cursorAnim .5s infinite alternate;
-    pointer-events: none;
-}
-
-.cursor::after {
-    content: "";
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    border: 8px solid gray;
-    border-radius: 50%;
-    opacity: .5;
-    top: -8px;
-    left: -8px;
-    animation: cursorAnim2 .5s infinite alternate;
-}
-@keyframes cursorAnim {
-  from {
-      transform: scale(1);
-  }
-  to {
-      transform: scale(.7);
-  }
-}
-​
-@keyframes cursorAnim2 {
-  from {
-      transform: scale(1);
-  }
-  to {
-      transform: scale(.4);
-  }
-}
-​
-@keyframes cursorAnim3 {
-  0% {
-      transform: scale(1);
-  }
-  50% {
-      transform: scale(3);
-  }
-  100% {
-      transform: scale(1);
-      opacity: 0;
-  }
-}
-​
-.expand {
-  animation: cursorAnim3 .5s forwards;
-  border: 1px solid red;
-}
-​
-  -----------------
-
-  body {
-    font-family: Poppins;
-    transition: 0.3s ease-in-out;
-  }
-
-  .wave {
-    animation-name: wave-animation; 
-    animation-duration: 2.5s;    
-    animation-iteration-count: infinite;
-    transform-origin: 70% 70%;    
-    display: inline-block;
-  }
-  
-  @keyframes wave-animation {
-      0% { transform: rotate( 0.0deg) }
-     10% { transform: rotate(14.0deg) }  
-     20% { transform: rotate(-8.0deg) }
-     30% { transform: rotate(14.0deg) }
-     40% { transform: rotate(-4.0deg) }
-     50% { transform: rotate(10.0deg) }
-     60% { transform: rotate( 0.0deg) }  
-    100% { transform: rotate( 0.0deg) }
-  }
-
-  .updn {
-    animation-name: up-down;  
-    animation-duration: 5s;        
-    animation-iteration-count: infinite; 
-  }
-
-  @keyframes up-down {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
-}
-
-.searchModal {
-  display: none;
-}
-
-.animate-reveal {
-    animation: reveal 0.3s ease-out;
-  }
-
-@keyframes reveal {
-    from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-    to {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
-
-@keyframes shake {
-  from, to {
-    transform: translate3d(0, 0, 0);
-  }
-
-  10%, 30%, 50%, 70%, 90% {
-    transform: translate3d(-10px, 0, 0);
-  }
-
-  20%, 40%, 60%, 80% {
-    transform: translate3d(10px, 0, 0);
-  }
-}
-
-.shake {
-  animation: shake 0.5s;
-}
-
-</style>
 
 <script>
-  
-  
+
+
   const toggleButton = document.querySelector('.nav-btn');
   const navbarContent = document.querySelector('.mob-nav');
 
@@ -294,7 +297,7 @@
       return;
     }
     window.open("/search/?q=" + encodeURIComponent(searchQuery));
-  }  
+  }
 
   // Add event listeners
   searchBtn.addEventListener("click", showSearchModal);
